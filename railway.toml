@@ -1,5 +1,5 @@
 [build]
 builder = "DOCKERFILE"
 
-[deploy]
-startCommand = "./gophish"
+[[services]]
+port = 8080
