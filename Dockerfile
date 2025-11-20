@@ -7,7 +7,24 @@ RUN wget -O gophish.zip https://github.com/gophish/gophish/releases/download/v0.
 RUN unzip gophish.zip
 RUN chmod +x gophish
 
-# Create config.json using a single line echo
-RUN echo '{"admin_server": {"listen_url": "0.0.0.0:8080", "use_tls": false}, "phish_server": {"listen_url": "0.0.0.0:8081", "use_tls": false}, "db_name": "sqlite3", "db_path": "gophish.db", "migrations_prefix": "db/db_", "contact_address": "", "logging": {"filename": ""}}' > config.json
+# Create config with ALL security disabled for testing
+RUN echo '{' > config.json
+RUN echo '  "admin_server": {' >> config.json
+RUN echo '    "listen_url": "0.0.0.0:8080",' >> config.json
+RUN echo '    "use_tls": false,' >> config.json
+RUN echo '    "allowed_hosts": ["*"]' >> config.json
+RUN echo '  },' >> config.json
+RUN echo '  "phish_server": {' >> config.json
+RUN echo '    "listen_url": "0.0.0.0:8081",' >> config.json
+RUN echo '    "use_tls": false' >> config.json
+RUN echo '  },' >> config.json
+RUN echo '  "db_name": "sqlite3",' >> config.json
+RUN echo '  "db_path": "gophish.db",' >> config.json
+RUN echo '  "migrations_prefix": "db/db_",' >> config.json
+RUN echo '  "contact_address": "",' >> config.json
+RUN echo '  "logging": {' >> config.json
+RUN echo '    "filename": ""' >> config.json
+RUN echo '  }' >> config.json
+RUN echo '}' >> config.json
 
 CMD ["./gophish"]
