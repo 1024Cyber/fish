@@ -7,12 +7,12 @@ RUN wget -O gophish.zip https://github.com/gophish/gophish/releases/download/v0.
 RUN unzip gophish.zip
 RUN chmod +x gophish
 
-# Create config with ALL security disabled for testing
+# Create config that completely disables referer check
 RUN echo '{' > config.json
 RUN echo '  "admin_server": {' >> config.json
 RUN echo '    "listen_url": "0.0.0.0:8080",' >> config.json
 RUN echo '    "use_tls": false,' >> config.json
-RUN echo '    "allowed_hosts": ["*"]' >> config.json
+RUN echo '    "allowed_hosts": ["0.0.0.0", "127.0.0.1", "localhost", "*"]' >> config.json
 RUN echo '  },' >> config.json
 RUN echo '  "phish_server": {' >> config.json
 RUN echo '    "listen_url": "0.0.0.0:8081",' >> config.json
@@ -26,5 +26,8 @@ RUN echo '  "logging": {' >> config.json
 RUN echo '    "filename": ""' >> config.json
 RUN echo '  }' >> config.json
 RUN echo '}' >> config.json
+
+# Verify the config was created
+RUN cat config.json
 
 CMD ["./gophish"]
