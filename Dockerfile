@@ -9,7 +9,7 @@ RUN wget -O gophish.zip https://github.com/gophish/gophish/releases/download/v0.
 RUN unzip gophish.zip
 RUN chmod +x gophish
 
-# Create config file
+# Create config file with DIFFERENT ports
 RUN echo '{' > config.json
 RUN echo '  "admin_server": {' >> config.json
 RUN echo '    "listen_url": "0.0.0.0:8080",' >> config.json
@@ -17,7 +17,7 @@ RUN echo '    "use_tls": false,' >> config.json
 RUN echo '    "allowed_hosts": ["*"]' >> config.json
 RUN echo '  },' >> config.json
 RUN echo '  "phish_server": {' >> config.json
-RUN echo '    "listen_url": "0.0.0.0:8080",' >> config.json
+RUN echo '    "listen_url": "0.0.0.0:8081",' >> config.json
 RUN echo '    "use_tls": false' >> config.json
 RUN echo '  },' >> config.json
 RUN echo '  "db_name": "sqlite3",' >> config.json
