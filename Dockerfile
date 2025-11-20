@@ -7,14 +7,7 @@ RUN wget -O gophish.zip https://github.com/gophish/gophish/releases/download/v0.
 RUN unzip gophish.zip
 RUN chmod +x gophish
 
-RUN echo '{
-    "admin_server": {"listen_url": "0.0.0.0:8080", "use_tls": false},
-    "phish_server": {"listen_url": "0.0.0.0:8081", "use_tls": false},
-    "db_name": "sqlite3",
-    "db_path": "gophish.db",
-    "migrations_prefix": "db/db_",
-    "contact_address": "",
-    "logging": {"filename": ""}
-}' > config.json
+# Create config.json using a single line echo
+RUN echo '{"admin_server": {"listen_url": "0.0.0.0:8080", "use_tls": false}, "phish_server": {"listen_url": "0.0.0.0:8081", "use_tls": false}, "db_name": "sqlite3", "db_path": "gophish.db", "migrations_prefix": "db/db_", "contact_address": "", "logging": {"filename": ""}}' > config.json
 
 CMD ["./gophish"]
