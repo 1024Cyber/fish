@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: gophish
+    name: gophish-admin
     env: docker
     plan: free
     docker:
